@@ -14,7 +14,7 @@ function allNewDice() {
     const newDice = []
     //loop 10 times
     for (let i=0; i<10; i++) {
-        //create a random number from 1 to 6
+        //create a random number from 1 to 6, ceil- floors the number to a bigger one (0.986=1)
         newDice.push(Math.ceil(Math.random()*6))
     }
   return newDice
@@ -24,12 +24,17 @@ const diceElements = dice.map(function(die){
     return <Die value={die}/>
 })
 
+//
+function newDices() {
+    setDice(allNewDice())
+}
+
     return (
         <main>
             <div className="dice-container">
             {diceElements}
             </div>
-
+<button className="roll-button" onClick={newDices}>Roll</button>
         </main>
     )
 }
