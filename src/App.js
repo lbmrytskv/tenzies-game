@@ -17,7 +17,7 @@ function allNewDice() {
     for (let i=0; i<10; i++) {
         newDice.push({
             value: Math.ceil(Math.random()*6),
-            isHeld: true,
+            isHeld: false,
             id:nanoid()
 
     })}
@@ -25,12 +25,16 @@ function allNewDice() {
 }
 //passed prop to a die component through map method
 const diceElements = dice.map(function(die){
-    return <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
+    return <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={()=>{holdDice(die.id)}}/>
 })
 
 //
 function newDices() {
     setDice(allNewDice())
+}
+
+function holdDice(id) {
+     console.log(id)
 }
 
     return (
