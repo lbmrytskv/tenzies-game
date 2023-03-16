@@ -1,6 +1,7 @@
 
 import React from "react"
 import Die from "./Die"
+import {nanoid} from "nanoid"
 
 
 
@@ -16,14 +17,15 @@ function allNewDice() {
     for (let i=0; i<10; i++) {
         newDice.push({
             value: Math.ceil(Math.random()*6),
-            isHeld: false
+            isHeld: true,
+            id:nanoid()
 
     })}
   return newDice
 }
 //passed prop to a die component through map method
 const diceElements = dice.map(function(die){
-    return <Die value={die.value}/>
+    return <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
 })
 
 //
