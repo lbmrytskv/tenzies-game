@@ -10,6 +10,14 @@ export default function App() {
     //created state to hold our array of numbers
 const [dice, setDice] = React.useState(allNewDice())
 
+
+function generateNewDie() {
+    return {
+        value: Math.ceil(Math.random()*6),
+        isHeld: false,
+        id:nanoid()
+    }
+}
 //function that returns an array of objects
 function allNewDice() {
     const newDice = []
@@ -23,18 +31,26 @@ function allNewDice() {
     })}
   return newDice
 }
-//passed prop to a die component through map method
+//passed props to a die component through map method
 const diceElements = dice.map(function(die){
     return <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={()=>{holdDice(die.id)}}/>
 })
 
-//
+//function that keeps held dices after pressing a roll button
 function newDices() {
-    setDice(allNewDice())
+    setDice(oldDice => oldDice.map(die =>{
+        return die.isHeld === false ? generateNewDie() : die
+    }))
 }
 
+//created a function which flips the "isHeld" property on the object in an array which was clicked
 function holdDice(id) {
-     console.log(id)
+     setDice(oldDice => oldDice.map(die =>{
+        return die.id === id ?
+        {...die, isHeld: !die.isHeld} :
+        die
+     }  ))
+     
 }
 
     return (
