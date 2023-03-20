@@ -2,6 +2,7 @@ import React from "react"
 
 export default function Die(props) {
  
+    //conditional styling for clicked dices
     const styles = {
         backgroundColor: props.isHeld === true ? "#59E391" : "white"
     }
