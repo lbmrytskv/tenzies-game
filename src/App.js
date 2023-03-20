@@ -55,10 +55,14 @@ const diceElements = dice.map(function(die){
 
 
 //function that keeps selected dices held after pressing a roll button
-function newDices() {
+function newDices() { if (tenzies===false){
     setDice(oldDice => oldDice.map(die =>{
         return die.isHeld === false ? generateNewDie() : die
-    }))
+    }))} 
+    else {
+        setTenzies(false)
+        setDice(allNewDice()) 
+    }
 }
 
 //created a function which flips the "isHeld" property on the object in an array which was clicked
@@ -75,8 +79,8 @@ function holdDice(id) {
         <main>
             {tenzies && <Confetti/>}
             <h1 className="Title">Tenzies</h1>
-            <p className="instructions">Roll until all dice are the same. 
-    Click each die to freeze it at its current value between rolls.</p>
+            <p className="instructions">{!tenzies ? "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."
+             :"Congratulations, You have won!" }</p>
             <div className="dice-container">
             {diceElements}
             </div>
